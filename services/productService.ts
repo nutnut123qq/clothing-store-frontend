@@ -10,6 +10,19 @@ const api = axios.create({
   },
 })
 
+// attach token from localStorage if present
+api.interceptors.request.use((config) => {
+  try {
+    const token = typeof window !== 'undefined' ? localStorage.getItem('token') : null
+    if (token && config.headers) {
+      config.headers['Authorization'] = `Bearer ${token}`
+    }
+  } catch (e) {
+    // ignore
+  }
+  return config
+})
+
 export const productService = {
   async getProducts(page: number = 1, pageSize: number = 10, search?: string): Promise<ProductResponse> {
     const params = new URLSearchParams({

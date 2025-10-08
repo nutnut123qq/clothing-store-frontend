@@ -6,6 +6,8 @@ import { Product } from '@/types/Product'
 import { productService } from '@/services/productService'
 import LoadingSpinner from '@/components/LoadingSpinner'
 import Image from 'next/image'
+import { useCart } from '@/context/CartContext'
+import { useAuth } from '@/context/AuthContext'
 
 export default function ProductDetailPage() {
   const params = useParams()
@@ -118,12 +120,16 @@ export default function ProductDetailPage() {
                   {deleting ? 'Đang xóa...' : 'Xóa sản phẩm'}
                 </button>
               </div>
-              <button
-                onClick={() => router.push('/')}
-                className="btn-secondary w-full"
-              >
-                Quay lại danh sách
-              </button>
+              <div className="flex space-x-4">
+                <button
+                  onClick={() => router.push('/')}
+                  className="btn-secondary flex-1"
+                >
+                  Quay lại danh sách
+                </button>
+
+                <AddToCartButton product={product} />
+              </div>
             </div>
 
             <div className="border-t pt-4 text-sm text-gray-500">
@@ -134,5 +140,31 @@ export default function ProductDetailPage() {
         </div>
       </div>
     </div>
+  )
+}
+
+function AddToCartButton({ product }: { product: any }) {
+  const { addToCart } = useCart()
+  const { token } = useAuth()
+  const router = useRouter()
+  const [adding, setAdding] = useState(false)
+
+  const handleAdd = () => {
+    if (!token) {
+      // redirect to login
+      router.push('/auth/login')
+      return
+    }
+    setAdding(true)
+    try {
+      addToCart(product, 1)
+      alert('Đã thêm vào giỏ hàng')
+    } finally {
+      setAdding(false)
+    }
+  }
+
+  return (
+    <button onClick={handleAdd} className="btn-primary flex-1" disabled={adding}>{adding ? 'Đang...' : 'Thêm vào giỏ'}</button>
   )
 }

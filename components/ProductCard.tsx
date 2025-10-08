@@ -5,6 +5,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { Product } from '@/types/Product'
 import { productService } from '@/services/productService'
+import { useCart } from '@/context/CartContext'
 
 interface ProductCardProps {
   product: Product
@@ -13,6 +14,7 @@ interface ProductCardProps {
 
 export default function ProductCard({ product, onDeleted }: ProductCardProps) {
   const [deleting, setDeleting] = useState(false)
+  const { addToCart } = useCart()
 
   const handleDelete = async (e: React.MouseEvent) => {
     e.preventDefault()
@@ -61,6 +63,17 @@ export default function ProductCard({ product, onDeleted }: ProductCardProps) {
             </span>
             
             <div className="flex space-x-2">
+              <button
+                onClick={(e) => {
+                  e.preventDefault()
+                  e.stopPropagation()
+                  addToCart(product, 1)
+                  alert('Đã thêm vào giỏ hàng')
+                }}
+                className="text-sm text-primary-600 hover:text-primary-700 font-medium mr-2"
+              >
+                Thêm vào giỏ
+              </button>
               <Link
                 href={`/products/${product.id}/edit`}
                 className="text-sm text-primary-600 hover:text-primary-700 font-medium"
