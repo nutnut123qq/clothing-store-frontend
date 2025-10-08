@@ -4,6 +4,11 @@ import { useCart } from '@/context/CartContext'
 import { orderService } from '@/services/orderService'
 import { useRouter } from 'next/navigation'
 import { useState } from 'react'
+import { useClientOnly } from '@/hooks/useClientOnly'
+
+// Force dynamic rendering (disable static generation)
+export const dynamic = 'force-dynamic'
+export const fetchCache = 'force-no-store'
 
 // helper to check token
 function isAuthenticated() {
@@ -11,9 +16,14 @@ function isAuthenticated() {
 }
 
 export default function CheckoutPage() {
+  const isClient = useClientOnly()
   const { items, clearCart, total } = useCart()
   const router = useRouter()
   const [loading, setLoading] = useState(false)
+
+  if (!isClient) {
+    return <div className="container mx-auto px-4 py-8">Đang tải...</div>
+  }
 
   const handlePlaceOrder = async () => {
     if (!isAuthenticated()) {

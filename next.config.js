@@ -1,11 +1,13 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  experimental: {
-    appDir: true,
-  },
   images: {
     domains: ['via.placeholder.com', 'images.unsplash.com', 'picsum.photos'],
     formats: ['image/webp', 'image/avif'],
+  },
+  // Skip static generation for pages using localStorage/Context
+  // This prevents "useCart must be used within CartProvider" errors
+  experimental: {
+    missingSuspenseWithCSRBailout: false,
   },
   // Production optimizations
   compress: true,
@@ -42,8 +44,8 @@ const nextConfig = {
   // Performance optimizations
   swcMinify: true,
   reactStrictMode: true,
-  // For static export (GitHub Pages, Netlify)
-  // output: 'export',
+  // IMPORTANT: Do NOT use static export - it breaks Context/localStorage
+  // output: 'export', // ❌ Disabled - causes prerender errors
   // trailingSlash: true,
 }
 

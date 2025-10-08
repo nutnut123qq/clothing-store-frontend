@@ -4,6 +4,9 @@ import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { useAuth } from '@/context/AuthContext'
 
+// Force dynamic rendering
+export const dynamic = 'force-dynamic'
+
 export default function RegisterPage() {
   const { register } = useAuth()
   const router = useRouter()

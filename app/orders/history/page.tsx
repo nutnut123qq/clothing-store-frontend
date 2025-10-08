@@ -4,6 +4,9 @@ import { useEffect, useState } from 'react'
 import { orderService } from '@/services/orderService'
 import Link from 'next/link'
 
+// Force dynamic rendering
+export const dynamic = 'force-dynamic'
+
 export default function OrderHistoryPage() {
   const [orders, setOrders] = useState<any[]>([])
 

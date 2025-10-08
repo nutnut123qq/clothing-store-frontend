@@ -3,10 +3,20 @@
 import { useCart } from '@/context/CartContext'
 import Image from 'next/image'
 import { useRouter } from 'next/navigation'
+import { useClientOnly } from '@/hooks/useClientOnly'
+
+// Force dynamic rendering (disable static generation)
+export const dynamic = 'force-dynamic'
+export const fetchCache = 'force-no-store'
 
 export default function CartPage() {
+  const isClient = useClientOnly()
   const { items, updateQuantity, removeFromCart, total } = useCart()
   const router = useRouter()
+
+  if (!isClient) {
+    return <div className="container mx-auto px-4 py-8">Đang tải...</div>
+  }
 
   return (
     <div className="container mx-auto px-4 py-8">

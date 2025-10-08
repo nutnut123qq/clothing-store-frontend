@@ -9,6 +9,9 @@ import Image from 'next/image'
 import { useCart } from '@/context/CartContext'
 import { useAuth } from '@/context/AuthContext'
 
+// Force dynamic rendering
+export const dynamic = 'force-dynamic'
+
 export default function ProductDetailPage() {
   const params = useParams()
   const router = useRouter()

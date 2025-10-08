@@ -4,6 +4,9 @@ import { useEffect, useState } from 'react'
 import { useRouter, useParams } from 'next/navigation'
 import { orderService } from '@/services/orderService'
 
+// Force dynamic rendering
+export const dynamic = 'force-dynamic'
+
 export default function OrderDetailPage() {
   const params = useParams()
   const id = Number(params.id)

@@ -69,6 +69,21 @@ export const CartProvider = ({ children }: { children: React.ReactNode }) => {
 
 export const useCart = () => {
   const ctx = useContext(CartContext)
-  if (!ctx) throw new Error('useCart must be used within CartProvider')
+  // During SSR/prerender, return a safe default instead of throwing so
+  // pages that reference the cart can be prerendered without a provider.
+  if (!ctx) {
+    if (typeof window === 'undefined') {
+      return {
+        items: [],
+        addToCart: (_product: Product, _qty: number = 1) => {},
+        updateQuantity: (_productId: number, _qty: number) => {},
+        removeFromCart: (_productId: number) => {},
+        clearCart: () => {},
+        total: 0,
+      } as CartContextType
+    }
+    // In client runtime, still throw to help developers catch misuse.
+    throw new Error('useCart must be used within CartProvider')
+  }
   return ctx
 }
