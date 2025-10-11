@@ -1,0 +1,35 @@
+{
+  "name": "clothing-store-frontend",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "build:prod": "NODE_ENV=production next build",
+    "start:prod": "NODE_ENV=production next start",
+    "export": "next build && next export",
+    "deploy": "npm run export && gh-pages -d out",
+    "docker:build": "docker build -t clothing-store-frontend .",
+    "docker:run": "docker run -p 3000:3000 clothing-store-frontend",
+    "analyze": "ANALYZE=true npm run build"
+  },
+  "dependencies": {
+    "@types/node": "^20.8.0",
+    "@types/react": "^18.2.25",
+    "@types/react-dom": "^18.2.11",
+    "autoprefixer": "^10.4.16",
+    "axios": "^1.5.0",
+    "next": "^14.2.33",
+    "postcss": "^8.4.31",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "tailwindcss": "^3.3.0",
+    "typescript": "^5.2.2"
+  },
+  "devDependencies": {
+    "eslint": "^8.51.0",
+    "eslint-config-next": "14.0.0"
+  }
+}
