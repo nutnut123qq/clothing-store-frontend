@@ -6,10 +6,7 @@ import Image from 'next/image'
 import { Product } from '@/types/Product'
 import { productService } from '@/services/productService'
 import { useCart } from '@/context/CartContext'
-<<<<<<< HEAD
 import { useAuth } from '@/context/AuthContext'
-=======
->>>>>>> 50541cdd110ab3173be89e0c169529dcadb25fe8
 
 interface ProductCardProps {
   product: Product
@@ -19,10 +16,7 @@ interface ProductCardProps {
 export default function ProductCard({ product, onDeleted }: ProductCardProps) {
   const [deleting, setDeleting] = useState(false)
   const { addToCart } = useCart()
-<<<<<<< HEAD
   const { token } = useAuth()
-=======
->>>>>>> 50541cdd110ab3173be89e0c169529dcadb25fe8
 
   const handleDelete = async (e: React.MouseEvent) => {
     e.preventDefault()
@@ -82,7 +76,6 @@ export default function ProductCard({ product, onDeleted }: ProductCardProps) {
               >
                 Thêm vào giỏ
               </button>
-<<<<<<< HEAD
               {token && (
                 <>
                   <Link
@@ -102,23 +95,6 @@ export default function ProductCard({ product, onDeleted }: ProductCardProps) {
                   </button>
                 </>
               )}
-=======
-              <Link
-                href={`/products/${product.id}/edit`}
-                className="text-sm text-primary-600 hover:text-primary-700 font-medium"
-                onClick={(e) => e.stopPropagation()}
-              >
-                Sửa
-              </Link>
-              
-              <button
-                onClick={handleDelete}
-                disabled={deleting}
-                className="text-sm text-red-600 hover:text-red-700 font-medium disabled:opacity-50"
-              >
-                {deleting ? 'Đang xóa...' : 'Xóa'}
-              </button>
->>>>>>> 50541cdd110ab3173be89e0c169529dcadb25fe8
             </div>
           </div>
         </div>
