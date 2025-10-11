@@ -1,7 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   images: {
-    domains: ['via.placeholder.com', 'images.unsplash.com', 'picsum.photos'],
+    domains: ['via.placeholder.com', 'images.unsplash.com', 'picsum.photos', 'bizweb.dktcdn.net'],
     formats: ['image/webp', 'image/avif'],
   },
   // Skip static generation for pages using localStorage/Context
