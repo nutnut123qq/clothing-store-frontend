@@ -107,7 +107,37 @@ export default function ProductDetailPage() {
               </p>
             </div>
 
+<<<<<<< HEAD
             <ProductActions product={product} onDelete={handleDelete} deleting={deleting} router={router} />
+=======
+            <div className="space-y-4">
+              <div className="flex space-x-4">
+                <button
+                  onClick={() => router.push(`/products/${product.id}/edit`)}
+                  className="btn-primary flex-1"
+                >
+                  Chỉnh sửa sản phẩm
+                </button>
+                <button
+                  onClick={handleDelete}
+                  disabled={deleting}
+                  className="btn-danger flex-1 disabled:opacity-50"
+                >
+                  {deleting ? 'Đang xóa...' : 'Xóa sản phẩm'}
+                </button>
+              </div>
+              <div className="flex space-x-4">
+                <button
+                  onClick={() => router.push('/')}
+                  className="btn-secondary flex-1"
+                >
+                  Quay lại danh sách
+                </button>
+
+                <AddToCartButton product={product} />
+              </div>
+            </div>
+>>>>>>> 50541cdd110ab3173be89e0c169529dcadb25fe8
 
             <div className="border-t pt-4 text-sm text-gray-500">
               <p>Ngày tạo: {new Date(product.createdAt).toLocaleDateString('vi-VN')}</p>
@@ -120,6 +150,7 @@ export default function ProductDetailPage() {
   )
 }
 
+<<<<<<< HEAD
 function ProductActions({ product, onDelete, deleting, router }: { product: any, onDelete: () => void, deleting: boolean, router: any }) {
   const { token } = useAuth()
   const { addToCart } = useCart()
@@ -127,6 +158,17 @@ function ProductActions({ product, onDelete, deleting, router }: { product: any,
 
   const handleAddToCart = () => {
     if (!token) {
+=======
+function AddToCartButton({ product }: { product: any }) {
+  const { addToCart } = useCart()
+  const { token } = useAuth()
+  const router = useRouter()
+  const [adding, setAdding] = useState(false)
+
+  const handleAdd = () => {
+    if (!token) {
+      // redirect to login
+>>>>>>> 50541cdd110ab3173be89e0c169529dcadb25fe8
       router.push('/auth/login')
       return
     }
@@ -140,6 +182,7 @@ function ProductActions({ product, onDelete, deleting, router }: { product: any,
   }
 
   return (
+<<<<<<< HEAD
     <div className="space-y-4">
       {token && (
         <div className="flex space-x-4">
@@ -174,5 +217,8 @@ function ProductActions({ product, onDelete, deleting, router }: { product: any,
         </button>
       </div>
     </div>
+=======
+    <button onClick={handleAdd} className="btn-primary flex-1" disabled={adding}>{adding ? 'Đang...' : 'Thêm vào giỏ'}</button>
+>>>>>>> 50541cdd110ab3173be89e0c169529dcadb25fe8
   )
 }

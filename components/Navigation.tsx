@@ -6,7 +6,10 @@ import { useAuth } from '@/context/AuthContext'
 
 export default function Navigation() {
   const pathname = usePathname()
+<<<<<<< HEAD
   const { token } = useAuth()
+=======
+>>>>>>> 50541cdd110ab3173be89e0c169529dcadb25fe8
 
   const isActive = (path: string) => pathname === path
 
@@ -30,6 +33,7 @@ export default function Navigation() {
               Trang chủ
             </Link>
             
+<<<<<<< HEAD
             {token && (
               <Link
                 href="/products/new"
@@ -47,10 +51,17 @@ export default function Navigation() {
               href="/cart"
               className={`px-3 py-2 rounded-md text-sm font-medium transition-colors ${
                 isActive('/cart') 
+=======
+            <Link
+              href="/products/new"
+              className={`px-3 py-2 rounded-md text-sm font-medium transition-colors ${
+                isActive('/products/new') 
+>>>>>>> 50541cdd110ab3173be89e0c169529dcadb25fe8
                   ? 'bg-primary-100 text-primary-700' 
                   : 'text-gray-600 hover:text-gray-900 hover:bg-gray-100'
               }`}
             >
+<<<<<<< HEAD
               Giỏ hàng
             </Link>
 
@@ -63,6 +74,9 @@ export default function Navigation() {
               }`}
             >
               Đơn hàng
+=======
+              Thêm sản phẩm
+>>>>>>> 50541cdd110ab3173be89e0c169529dcadb25fe8
             </Link>
           </div>
           <div className="flex items-center space-x-4">
